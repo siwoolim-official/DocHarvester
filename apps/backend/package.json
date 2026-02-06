@@ -1,0 +1,10 @@
+{
+    "name": "backend",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "gradlew.bat build",
+        "test": "gradlew.bat test",
+        "dev": "gradlew.bat bootRun"
+    }
+}

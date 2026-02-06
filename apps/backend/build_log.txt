@@ -1,0 +1,29 @@
+
+> Task :compileJava FAILED
+C:\dev\DocHarvester\apps\backend\src\main\java\com\docharvester\service\ContentExtractionService.java:104: error: cannot find symbol
+                    page.navigate(url, new Page.NavigateOptions().setWaitUntil(WaitUntilState.NETWORKIDLE));
+                                                                               ^
+  symbol:   variable WaitUntilState
+  location: class ContentExtractionService
+1 error
+
+[Incubating] Problems report is available at: file:///C:/dev/DocHarvester/apps/backend/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  C:\dev\DocHarvester\apps\backend\src\main\java\com\docharvester\service\ContentExtractionService.java:104: error: cannot find symbol
+                      page.navigate(url, new Page.NavigateOptions().setWaitUntil(WaitUntilState.NETWORKIDLE));
+                                                                                 ^
+    symbol:   variable WaitUntilState
+    location: class ContentExtractionService
+  1 error
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to generate a Build Scan (Powered by Develocity).
+
+BUILD FAILED in 2s
+1 actionable task: 1 executed

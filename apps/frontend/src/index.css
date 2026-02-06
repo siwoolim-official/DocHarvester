@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* Deep Dark Theme (Slate/Zinc inspired) */
+        --background: 222 47% 11%;
+        /* Slate 950 base */
+        --foreground: 210 40% 98%;
+
+        --card: 217 33% 17%;
+        /* Slate 900 */
+        --card-foreground: 210 40% 98%;
+
+        --popover: 217 33% 17%;
+        --popover-foreground: 210 40% 98%;
+
+        --primary: 252 87% 74%;
+        /* Soft Purple/Indigo accent (NotebookLM vibe) */
+        --primary-foreground: 222 47% 11%;
+
+        --secondary: 215 25% 27%;
+        /* Slate 800 */
+        --secondary-foreground: 210 40% 98%;
+
+        --muted: 215 25% 27%;
+        --muted-foreground: 215 20.2% 65.1%;
+
+        --accent: 215 25% 27%;
+        --accent-foreground: 210 40% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 215 25% 27%;
+        /* Slate 800 borders */
+        --input: 215 25% 27%;
+        --ring: 252 87% 74%;
+
+        --radius: 0.75rem;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+}
+
+@layer utilities {
+
+    /* Utility for subtle clean cards */
+    .dashboard-card {
+        @apply bg-card text-card-foreground rounded-2xl border border-border shadow-sm;
+    }
+
+    /* Input fields that blend in */
+    .dashboard-input {
+        @apply bg-secondary/50 border-transparent focus:border-primary focus:bg-secondary transition-all duration-200 text-foreground placeholder:text-muted-foreground;
+    }
+}
