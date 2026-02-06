@@ -1,0 +1,13 @@
+﻿
+> frontend@0.0.0 build C:\dev\DocHarvester\apps\frontend
+> tsc -b && vite build
+
+src/components/ConversionStatus.tsx(72,96): error TS2322: Type '{ value: any; className: string; indicatorClassName: string; }' is not assignable to type 'IntrinsicAttributes & Omit<ProgressProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<HTMLDivElement>'.
+  Property 'indicatorClassName' does not exist on type 'IntrinsicAttributes & Omit<ProgressProps & RefAttributes<HTMLDivElement>, "ref"> & RefAttributes<HTMLDivElement>'.
+src/components/layout/AppSidebar.tsx(2,27): error TS6133: 'History' is declared but its value is never read.
+src/components/layout/AppSidebar.tsx(2,46): error TS6133: 'PlusCircle' is declared but its value is never read.
+src/components/layout/DashboardLayout.tsx(1,10): error TS1484: 'ReactNode' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+src/components/StartConversion.tsx(4,18): error TS6133: 'AnimatePresence' is declared but its value is never read.
+src/components/StartConversion.tsx(11,1): error TS6133: 'cn' is declared but its value is never read.
+src/components/tools/PdfMergeTool.tsx(3,49): error TS1484: 'DropResult' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
+?덭LIFECYCLE??Command failed with exit code 2.

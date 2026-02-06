@@ -1,0 +1,223 @@
+﻿Initialized native services in: C:\Scoop\apps\gradle\current\.gradle\native
+Initialized jansi services in: C:\Scoop\apps\gradle\current\.gradle\native
+Found daemon DaemonInfo{pid=42032, address=[7a75fa56-36c2-43b6-a95b-f0e9364c560b port:58341, addresses:[/127.0.0.1]], state=Idle, lastBusy=1770354991823, context=DefaultDaemonContext[uid=fd0fd4cf-15c5-4278-ad3b-6edb4f7dd3ca,javaHome=C:\Users\CSLEE01\.antigravity\extensions\redhat.java-1.52.0-win32-x64\jre\21.0.9-win32-x86_64,javaVersion=21,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Scoop\apps\gradle\current\.gradle\daemon,pid=42032,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=KR,-Duser.language=ko,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{jvmCriteria=C:\dev\java\openjdk_21.0.9_10 (no JDK specified, using current Java home), daemonOpts=[-XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=KR, -Duser.language=ko, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=fd0fd4cf-15c5-4278-ad3b-6edb4f7dd3ca,javaHome=C:\Users\CSLEE01\.antigravity\extensions\redhat.java-1.52.0-win32-x64\jre\21.0.9-win32-x86_64,javaVersion=21,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Scoop\apps\gradle\current\.gradle\daemon,pid=42032,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=KR,-Duser.language=ko,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 35356). The daemon log file: C:\Scoop\apps\gradle\current\.gradle\daemon\9.0.0\daemon-35356.out.log
+Starting 19th build in daemon [uptime: 22 hrs 52 mins 59.148 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 512 MiB, non-heap usage: 25% of 384 MiB]
+Using 16 worker leases.
+Now considering [C:\dev\DocHarvester\apps\backend] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'C:\dev\DocHarvester\apps\backend\settings.gradle'.
+Projects loaded. Root project using build file 'C:\dev\DocHarvester\apps\backend\build.gradle'.
+Included projects: [root project 'backend']
+
+> Configure project :
+Evaluating root project 'backend' using build file 'C:\dev\DocHarvester\apps\backend\build.gradle'.
+Resolved plugin [id: 'java']
+Resolved plugin [id: 'org.springframework.boot', version: '3.4.2']
+Resolved plugin [id: 'io.spring.dependency-management', version: '1.1.7']
+Applying dependency management to configuration 'annotationProcessor' in project 'backend'
+Applying dependency management to configuration 'apiElements' in project 'backend'
+Applying dependency management to configuration 'archives' in project 'backend'
+Applying dependency management to configuration 'bootArchives' in project 'backend'
+Applying dependency management to configuration 'compileClasspath' in project 'backend'
+Applying dependency management to configuration 'compileOnly' in project 'backend'
+Applying dependency management to configuration 'default' in project 'backend'
+Applying dependency management to configuration 'developmentOnly' in project 'backend'
+Applying dependency management to configuration 'implementation' in project 'backend'
+Applying dependency management to configuration 'mainSourceElements' in project 'backend'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'backend'
+Applying dependency management to configuration 'runtimeClasspath' in project 'backend'
+Applying dependency management to configuration 'runtimeElements' in project 'backend'
+Applying dependency management to configuration 'runtimeOnly' in project 'backend'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'backend'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'backend'
+Applying dependency management to configuration 'testCompileClasspath' in project 'backend'
+Applying dependency management to configuration 'testCompileOnly' in project 'backend'
+Applying dependency management to configuration 'testImplementation' in project 'backend'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'backend'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'backend'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'backend'
+All projects evaluated.
+Task name matched 'classes'
+Selected primary task 'classes' from project :
+Excluding []
+Resolving global dependency management for project 'backend'
+Excluding []
+Tasks to be executed: [task ':compileJava', task ':processResources', task ':classes']
+Tasks that were excluded: []
+Resolve mutations for :compileJava (Thread[#3335,Execution worker,5,main]) started.
+:compileJava (Thread[#3335,Execution worker,5,main]) started.
+
+> Task :compileJava FAILED
+Custom actions are attached to task ':compileJava'.
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Task ':compileJava' is not up-to-date because:
+  Task has failed previously.
+The input changes require a full rebuild for incremental task ':compileJava'.
+Compilation mode: in-process compilation
+Full recompilation is required because no incremental change information is available. This is usually caused by clean builds or changing compiler arguments.
+Compiling with toolchain 'C:\dev\java\openjdk_21.0.9_10'.
+Compiling with JDK Java compiler API.
+cmd : C:\dev\DocHarves
+ter\apps\backend\src\m
+ain\java\com\docharves
+ter\service\PdfToolSer
+vice.java:43: error: n
+o suitable method foun
+d for addSource(InputS
+tream)
+위치 줄:1 문자:1
++ cmd /c gradlew.bat c
+lasses --info > build_
+back.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo    
+          : NotSpeci  
+  fied: (C:\dev\Doc   
+ Harve...ce(InputS    
+tream):String) []    ,
+ RemoteException
+    + FullyQualifiedE 
+   rrorId : NativeCo  
+  mmandError
+ 
+            merger.add
+Source(file.getInputSt
+ream());
+                  ^
+    method PDFMergerUt
+ility.addSource(String
+) is not applicable
+      (argument mismat
+ch; InputStream cannot
+ be converted to Strin
+g)
+    method PDFMergerUt
+ility.addSource(File) 
+is not applicable
+      (argument mismat
+ch; InputStream cannot
+ be converted to File)
+    method PDFMergerUt
+ility.addSource(Random
+AccessRead) is not app
+licable
+      (argument mismat
+ch; InputStream cannot
+ be converted to Rando
+mAccessRead)
+C:\dev\DocHarvester\ap
+ps\backend\src\main\ja
+va\com\docharvester\se
+rvice\PdfToolService.j
+ava:48: error: incompa
+tible types: MemoryUsa
+geSetting cannot be co
+nverted to StreamCache
+CreateFunction
+        merger.mergeDo
+cuments(MemoryUsageSet
+ting.setupTempFileOnly
+());
+                      
+                      
+                      
+^
+Note: Some messages ha
+ve been simplified; re
+compile with -Xdiags:v
+erbose to get full out
+put
+2 errors
+
+[Incubating] Problems report is available at: file:///C:/dev/DocHarvester/apps/backend/build/reports/problems/problems-report.html
+
+FAILURE: Build failed 
+with an exception.
+
+* What went wrong:
+Execution failed for t
+ask ':compileJava'.
+> Compilation failed; 
+see the compiler outpu
+t below.
+  C:\dev\DocHarvester\
+apps\backend\src\main\
+java\com\docharvester\
+service\PdfToolService
+.java:43: error: no su
+itable method found fo
+r addSource(InputStrea
+m)
+              merger.a
+ddSource(file.getInput
+Stream());
+                    ^
+      method PDFMerger
+Utility.addSource(Stri
+ng) is not applicable
+        (argument mism
+atch; InputStream cann
+ot be converted to Str
+ing)
+      method PDFMerger
+Utility.addSource(File
+) is not applicable
+        (argument mism
+atch; InputStream cann
+ot be converted to Fil
+e)
+      method PDFMerger
+Utility.addSource(Rand
+omAccessRead) is not a
+pplicable
+        (argument mism
+atch; InputStream cann
+ot be converted to Ran
+domAccessRead)
+  C:\dev\DocHarvester\
+apps\backend\src\main\
+java\com\docharvester\
+service\PdfToolService
+.java:48: error: incom
+patible types: MemoryU
+sageSetting cannot be 
+converted to StreamCac
+heCreateFunction
+          merger.merge
+Documents(MemoryUsageS
+etting.setupTempFileOn
+ly());
+                      
+                      
+                      
+  ^
+  Note: Some messages 
+have been simplified; 
+recompile with -Xdiags
+:verbose to get full o
+utput
+  2 errors
+
+* Try:
+> Check your code and 
+dependencies to fix th
+e compilation error(s)
+> Run with --scan to g
+enerate a Build Scan (
+Powered by Develocity)
+.
+
+BUILD FAILED in 2s
+1 actionable task: 1 executed
+Watched directory hierarchies: [C:\dev\DocHarvester\apps\backend]

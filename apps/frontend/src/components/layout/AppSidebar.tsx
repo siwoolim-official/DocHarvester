@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion';
-import { LayoutDashboard, History, Settings, PlusCircle, FileText } from 'lucide-react';
+import { LayoutDashboard, Settings, FileText, Files } from 'lucide-react';
 import { Button } from '../ui/button';
 
-export function AppSidebar() {
+interface AppSidebarProps {
+    currentView: 'extraction' | 'merge';
+    onNavigate: (view: 'extraction' | 'merge') => void;
+}
+
+export function AppSidebar({ currentView, onNavigate }: AppSidebarProps) {
     return (
         <motion.aside
             initial={{ x: -20, opacity: 0 }}
@@ -17,17 +22,25 @@ export function AppSidebar() {
             </div>
 
             <nav className="space-y-2 flex-1">
-                <Button variant="secondary" className="w-full justify-start gap-3 bg-indigo-600 hover:bg-indigo-700 text-white border-0">
+                {/* <Button variant="secondary" className="w-full justify-start gap-3 bg-indigo-600 hover:bg-indigo-700 text-white border-0">
                     <PlusCircle className="w-4 h-4" /> 새 변환 작업
-                </Button>
+                </Button> */}
 
                 <div className="pt-4">
-                    <p className="px-2 text-xs font-semibold text-slate-500 uppercase mb-2">Menu</p>
-                    <Button variant="ghost" className="w-full justify-start gap-3 text-slate-400 hover:text-white hover:bg-slate-800">
-                        <LayoutDashboard className="w-4 h-4" /> 대시보드
+                    <p className="px-2 text-xs font-semibold text-slate-500 uppercase mb-2">Tools</p>
+                    <Button
+                        variant={currentView === 'extraction' ? 'secondary' : 'ghost'}
+                        className={`w-full justify-start gap-3 ${currentView === 'extraction' ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
+                        onClick={() => onNavigate('extraction')}
+                    >
+                        <LayoutDashboard className="w-4 h-4" /> 웹 페이지 추출
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-3 text-slate-400 hover:text-white hover:bg-slate-800">
-                        <History className="w-4 h-4" /> 최근 기록
+                    <Button
+                        variant={currentView === 'merge' ? 'secondary' : 'ghost'}
+                        className={`w-full justify-start gap-3 ${currentView === 'merge' ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
+                        onClick={() => onNavigate('merge')}
+                    >
+                        <Files className="w-4 h-4" /> PDF 병합
                     </Button>
                 </div>
             </nav>

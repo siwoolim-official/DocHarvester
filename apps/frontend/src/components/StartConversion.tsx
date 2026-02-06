@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Loader2, Link, FileText, ArrowRight } from 'lucide-react';
 import { api } from '../lib/api';
 import { useConversionStore } from '../store/useConversionStore';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { cn } from '../lib/utils';
+// import { cn } from '../lib/utils';
 import { Card } from './ui/card';
 
 const formSchema = z.object({

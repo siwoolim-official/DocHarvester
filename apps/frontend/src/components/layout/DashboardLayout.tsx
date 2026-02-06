@@ -1,15 +1,17 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { AppSidebar } from './AppSidebar';
 import { Sparkles } from 'lucide-react';
 
 interface DashboardLayoutProps {
     children: ReactNode;
+    currentView: 'extraction' | 'merge';
+    onNavigate: (view: 'extraction' | 'merge') => void;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({ children, currentView, onNavigate }: DashboardLayoutProps) {
     return (
         <div className="min-h-screen bg-[#0f172a] text-slate-100 flex">
-            <AppSidebar />
+            <AppSidebar currentView={currentView} onNavigate={onNavigate} />
 
             <main className="flex-1 md:ml-64 flex flex-col h-screen overflow-hidden">
                 {/* Header */}
