@@ -83,3 +83,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Application Storage
+apps/backend/storage/
+
+
