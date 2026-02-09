@@ -2,10 +2,12 @@ import type { ReactNode } from 'react';
 import { AppSidebar } from './AppSidebar';
 import { Sparkles } from 'lucide-react';
 
+import { Toaster } from '../ui/toaster';
+
 interface DashboardLayoutProps {
     children: ReactNode;
-    currentView: 'extraction' | 'merge';
-    onNavigate: (view: 'extraction' | 'merge') => void;
+    currentView: 'extraction' | 'merge' | 'collector';
+    onNavigate: (view: 'extraction' | 'merge' | 'collector') => void;
 }
 
 export function DashboardLayout({ children, currentView, onNavigate }: DashboardLayoutProps) {
@@ -34,6 +36,7 @@ export function DashboardLayout({ children, currentView, onNavigate }: Dashboard
                     </div>
                 </div>
             </main>
+            <Toaster />
         </div>
     );
 }

@@ -3,22 +3,25 @@ import { StartConversion } from './components/StartConversion';
 import { ConversionStatus } from './components/ConversionStatus';
 import { DownloadResult } from './components/DownloadResult';
 import { PdfMergeTool } from './components/tools/PdfMergeTool';
+import { UrlCollectorTool } from './components/tools/UrlCollectorTool';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 
 function App() {
-  const [currentView, setCurrentView] = useState<'extraction' | 'merge'>('extraction');
+  const [currentView, setCurrentView] = useState<'extraction' | 'merge' | 'collector'>('extraction');
 
   return (
     <DashboardLayout currentView={currentView} onNavigate={setCurrentView}>
       <div className="max-w-4xl mx-auto w-full space-y-8 pb-20">
         <header className="mb-8">
           <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-cyan-400">
-            {currentView === 'extraction' ? 'Web Content Extraction' : 'PDF Merge Tool'}
+            {currentView === 'extraction' ? 'Web Content Extraction' : currentView === 'merge' ? 'PDF Merge Tool' : 'Smart URL Collector'}
           </h1>
           <p className="text-slate-400 mt-2">
             {currentView === 'extraction'
               ? 'URL을 입력하여 웹 페이지를 PDF 또는 HTML로 변환하세요.'
-              : '여러 PDF 파일을 하나로 병합합니다.'}
+              : currentView === 'merge'
+              ? '여러 PDF 파일을 하나로 병합합니다.'
+              : '웹 사이트의 하위 URL을 자동으로 수집하고 관리합니다.'}
           </p>
         </header>
 
@@ -44,6 +47,12 @@ function App() {
         {currentView === 'merge' && (
           <div className="grid gap-6">
             <PdfMergeTool />
+          </div>
+        )}
+
+        {currentView === 'collector' && (
+          <div className="grid gap-6">
+            <UrlCollectorTool />
           </div>
         )}
       </div>

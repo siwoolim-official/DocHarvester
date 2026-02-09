@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Settings, FileText, Files } from 'lucide-react';
+import { LayoutDashboard, Settings, FileText, Files, Globe } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface AppSidebarProps {
-    currentView: 'extraction' | 'merge';
-    onNavigate: (view: 'extraction' | 'merge') => void;
+    currentView: 'extraction' | 'merge' | 'collector';
+    onNavigate: (view: 'extraction' | 'merge' | 'collector') => void;
 }
 
 export function AppSidebar({ currentView, onNavigate }: AppSidebarProps) {
@@ -41,6 +41,13 @@ export function AppSidebar({ currentView, onNavigate }: AppSidebarProps) {
                         onClick={() => onNavigate('merge')}
                     >
                         <Files className="w-4 h-4" /> PDF 병합
+                    </Button>
+                    <Button
+                        variant={currentView === 'collector' ? 'secondary' : 'ghost'}
+                        className={`w-full justify-start gap-3 ${currentView === 'collector' ? 'bg-slate-800 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
+                        onClick={() => onNavigate('collector')}
+                    >
+                        <Globe className="w-4 h-4" /> URL 수집기
                     </Button>
                 </div>
             </nav>

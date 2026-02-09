@@ -1,0 +1,35 @@
+﻿Starting a Gradle Daemon, 5 stopped Daemons could not be reused, use --status for details
+> Task :clean FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':clean'.
+> java.io.IOException: Unable to delete directory 'C:\dev\DocHarvester\apps\backend\build'
+    Failed to delete some children. This might happen because a process has files open or has its working directory set in the target directory.
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester\config
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester\controller
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester\domain
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester\dto
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester\repository
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester\service
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com\docharvester
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main\com
+    - C:\dev\DocHarvester\apps\backend\build\classes\java\main
+    - C:\dev\DocHarvester\apps\backend\build\classes\java
+    - C:\dev\DocHarvester\apps\backend\build\classes
+    - C:\dev\DocHarvester\apps\backend\build\generated\sources\annotationProcessor\java\main
+    - C:\dev\DocHarvester\apps\backend\build\generated\sources\annotationProcessor\java
+    - C:\dev\DocHarvester\apps\backend\build\generated\sources\annotationProcessor
+    - C:\dev\DocHarvester\apps\backend\build\generated\sources\headers\java\main
+    - C:\dev\DocHarvester\apps\backend\build\generated\sources\headers\java
+    - and more ...
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 6s
+1 actionable task: 1 executed
