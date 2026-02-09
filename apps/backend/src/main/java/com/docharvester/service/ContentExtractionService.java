@@ -4,7 +4,6 @@ import com.docharvester.domain.ConversionTask;
 import com.docharvester.domain.ConversionTask.TaskStatus;
 import com.docharvester.repository.ConversionTaskRepository;
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.WaitUntilState;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
@@ -162,7 +161,8 @@ public class ContentExtractionService {
         page.setDefaultNavigationTimeout(TIMEOUT);
 
         // 페이지 이동 및 대기
-        page.navigate(url, new Page.NavigateOptions().setWaitUntil(WaitUntilState.NETWORKIDLE));
+        page.navigate(url,
+                new Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.NETWORKIDLE));
 
         if (type == ExtractionType.PDF) {
             page.pdf(new Page.PdfOptions().setPath(batchDir.resolve(fileName + ".pdf")));
