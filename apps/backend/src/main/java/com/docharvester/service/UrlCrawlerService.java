@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UrlCrawlerService {
 
     private static final int MAX_DEPTH = 10;
-    private static final int MAX_COUNT = 1000;
+    private static final int MAX_COUNT = 10000;
 
     /**
      * 주어진 시작 URL로부터 링크를 수집합니다.
