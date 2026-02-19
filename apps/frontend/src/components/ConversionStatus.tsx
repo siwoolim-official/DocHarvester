@@ -5,6 +5,7 @@ import { useConversionStore } from '../store/useConversionStore';
 import { Progress } from './ui/progress';
 import { Card } from './ui/card';
 import { motion } from 'framer-motion';
+import { Button } from './ui/button';
 import { Loader2, CheckCircle2, XCircle } from 'lucide-react';
 
 export function ConversionStatus() {
@@ -71,6 +72,28 @@ export function ConversionStatus() {
                             </div>
                             <Progress value={data?.progress || 0} className="h-2 bg-slate-800" indicatorClassName="bg-indigo-500" />
                         </div>
+
+                        {(status === 'PENDING' || status === 'PROCESSING') && (
+                            <div className="flex justify-end pt-2">
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    onClick={async () => {
+                                        if (confirm("작업을 취소하시겠습니까?")) {
+                                            try {
+                                                await api.post(`/api/extract/cancel/${taskId}`);
+                                                updateGlobalStatus('CANCELLED', data?.progress || 0);
+                                            } catch (e) {
+                                                console.error("Failed to cancel", e);
+                                                alert("취소 요청 실패");
+                                            }
+                                        }
+                                    }}
+                                >
+                                    작업 취소
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </Card>

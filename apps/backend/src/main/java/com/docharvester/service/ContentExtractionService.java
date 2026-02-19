@@ -33,6 +33,7 @@ public class ContentExtractionService {
     private final ConversionTaskRepository taskRepository;
     private Playwright playwright;
     private Browser browser;
+    private final java.util.Map<UUID, Boolean> cancellationRequests = new java.util.concurrent.ConcurrentHashMap<>();
 
     @Value("${app.storage.path:./storage/temp}")
     private String STORAGE_PATH;
@@ -61,6 +62,21 @@ public class ContentExtractionService {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(HEADLESS));
         createStorageDirectory();
+
+        // 서버 시작 시 중단된 작업 정리
+        cleanupInterruptedTasks();
+    }
+
+    private void cleanupInterruptedTasks() {
+        List<ConversionTask> tasks = taskRepository.findAll();
+        for (ConversionTask task : tasks) {
+            if (task.getStatus() == TaskStatus.PROCESSING || task.getStatus() == TaskStatus.PENDING) {
+                task.setStatus(TaskStatus.FAILED);
+                // 에러 로그 파일 생성 등 추가 처리가 가능하지만, 우선 DB 상태만 업데이트
+                taskRepository.save(task);
+                System.out.println("중단된 작업 정리 완료: " + task.getTaskId());
+            }
+        }
     }
 
     /**
@@ -108,6 +124,11 @@ public class ContentExtractionService {
 
                 int total = urls.size();
                 for (int i = 0; i < total; i++) {
+                    // 취소 요청 확인
+                    if (cancellationRequests.getOrDefault(taskId, false)) {
+                        break; // 루프 탈출
+                    }
+
                     String url = urls.get(i);
                     String fileName = String.format("doc_%d", i + 1);
 
@@ -123,6 +144,15 @@ public class ContentExtractionService {
                     // 실시간성을 위해 직접 save 호출
                     updateProgress(taskId, (int) ((double) (i + 1) / total * 100));
                 }
+            }
+
+            // 취소 여부 확인 후 처리
+            if (cancellationRequests.getOrDefault(taskId, false)) {
+                task = taskRepository.findById(taskId).orElseThrow();
+                task.setStatus(TaskStatus.CANCELLED);
+                taskRepository.save(task);
+                cancellationRequests.remove(taskId); // 요청 제거
+                return; // 여기서 종료 (압축 등 수행 안함)
             }
 
             // 결과 압축
@@ -206,5 +236,9 @@ public class ContentExtractionService {
                     });
         }
         return zipPath.toAbsolutePath().toString();
+    }
+
+    public void cancelTask(UUID taskId) {
+        cancellationRequests.put(taskId, true);
     }
 }

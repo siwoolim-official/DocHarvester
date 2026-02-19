@@ -41,7 +41,7 @@ public class ConversionController {
         UUID taskId = UUID.randomUUID();
 
         // 초기 태스크 저장
-        ConversionTask task = new ConversionTask(taskId);
+        ConversionTask task = new ConversionTask(taskId, request.urls(), request.type());
         taskRepository.save(task);
 
         // 비동기 작업 시작
@@ -94,5 +94,14 @@ public class ConversionController {
             // ignore
         }
         return ResponseEntity.notFound().build();
+    }
+
+    /**
+     * 작업 취소 요청.
+     */
+    @PostMapping("/cancel/{taskId}")
+    public ResponseEntity<Void> cancelTask(@PathVariable UUID taskId) {
+        extractionService.cancelTask(taskId);
+        return ResponseEntity.ok().build();
     }
 }

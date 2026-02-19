@@ -1,10 +1,9 @@
 package com.docharvester.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import com.docharvester.service.ContentExtractionService.ExtractionType;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -30,14 +29,25 @@ public class ConversionTask {
         PENDING,
         PROCESSING,
         COMPLETED,
-        FAILED
+        FAILED,
+        CANCELLED
     }
 
     public ConversionTask() {
     }
 
-    public ConversionTask(UUID taskId) {
+    @ElementCollection
+    @CollectionTable(name = "conversion_task_urls", joinColumns = @JoinColumn(name = "task_id"))
+    @Column(name = "url")
+    private List<String> urls;
+
+    @Enumerated(EnumType.STRING)
+    private ExtractionType type;
+
+    public ConversionTask(UUID taskId, List<String> urls, ExtractionType type) {
         this.taskId = taskId;
+        this.urls = urls;
+        this.type = type;
         this.status = TaskStatus.PENDING;
         this.createdAt = LocalDateTime.now();
         this.progress = 0;
@@ -74,5 +84,21 @@ public class ConversionTask {
 
     public void setProgress(int progress) {
         this.progress = progress;
+    }
+
+    public List<String> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(List<String> urls) {
+        this.urls = urls;
+    }
+
+    public ExtractionType getType() {
+        return type;
+    }
+
+    public void setType(ExtractionType type) {
+        this.type = type;
     }
 }
