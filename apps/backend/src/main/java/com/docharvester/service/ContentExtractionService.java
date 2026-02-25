@@ -194,6 +194,9 @@ public class ContentExtractionService {
         page.navigate(url,
                 new Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.NETWORKIDLE));
 
+        // 쿠키 동의 팝업 자동 처리
+        handleCookiePopups(page);
+
         if (type == ExtractionType.PDF) {
             page.pdf(new Page.PdfOptions().setPath(batchDir.resolve(fileName + ".pdf")));
         } else if (type == ExtractionType.HTML_NO_CSS || type == ExtractionType.HTML_WITH_CSS) {
@@ -204,6 +207,54 @@ public class ContentExtractionService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    /**
+     * 쿠키 및 안내 팝업을 닫거나 가리는 로직
+     * JS 주입을 통해 흔히 쓰이는 쿠키 동의 버튼을 클릭하고, 잔여 팝업을 강제로 숨김 처리합니다.
+     */
+    private void handleCookiePopups(Page page) {
+        try {
+            // 1. JS를 이용하여 공통 쿠키/동의 버튼 클릭 시도
+            Boolean clicked = (Boolean) page.evaluate("() => {" +
+                    "  const keywords = ['allow all', 'accept all', 'accept cookies', 'i accept', 'got it', '모두 동의', '동의', '허용', '확인', '동의합니다', 'accept', '동의하고 계속하기'];" +
+                    "  const buttons = document.querySelectorAll('button, a, [role=\"button\"]');" +
+                    "  for (const btn of buttons) {" +
+                    "    const text = (btn.innerText || '').trim().toLowerCase();" +
+                    "    if (keywords.includes(text) && btn.offsetHeight > 0) {" +
+                    "      btn.click();" +
+                    "      return true;" +
+                    "    }" +
+                    "  }" +
+                    "  return false;" +
+                    "}");
+                    
+            if (Boolean.TRUE.equals(clicked)) {
+                page.waitForTimeout(1000); // 클릭 후 모달이 닫히도록 1초 대기
+            }
+        } catch (Exception e) {
+            // 에러 발생 시 무시
+        }
+
+        try {
+            // 2. 강제로 화면 구조를 방해하는 쿠키/안내 고정 배너 숨기기
+            page.evaluate("() => {" +
+                    "  const tags = document.querySelectorAll('div, section, aside, iframe');" +
+                    "  for (const el of tags) {" +
+                    "    const style = window.getComputedStyle(el);" +
+                    "    if (style.position === 'fixed' || style.position === 'sticky') {" +
+                    "      const txt = el.textContent ? el.textContent.toLowerCase() : '';" +
+                    "      const zIndex = parseInt(style.zIndex, 10);" +
+                    "      if ((txt.includes('cookie') || txt.includes('쿠키') || txt.includes('gdpr')) && (zIndex > 50 || isNaN(zIndex))) {" +
+                    "        el.style.display = 'none';" +
+                    "      }" +
+                    "    }" +
+                    "  }" +
+                    "}");
+            page.waitForTimeout(500); // 렌더링 반영 대기
+        } catch (Exception e) {
+            // 에러 발생 시 무시
         }
     }
 
