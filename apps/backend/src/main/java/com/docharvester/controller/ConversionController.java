@@ -41,11 +41,11 @@ public class ConversionController {
         UUID taskId = UUID.randomUUID();
 
         // 초기 태스크 저장
-        ConversionTask task = new ConversionTask(taskId, request.urls(), request.type());
+        ConversionTask task = new ConversionTask(taskId, request.urls(), request.type(), request.scale());
         taskRepository.save(task);
 
         // 비동기 작업 시작
-        extractionService.processUrlsAsync(taskId, request.urls(), request.type());
+        extractionService.processUrlsAsync(taskId, request.urls(), request.type(), request.scale());
 
         return ResponseEntity.ok(Map.of("taskId", taskId.toString()));
     }

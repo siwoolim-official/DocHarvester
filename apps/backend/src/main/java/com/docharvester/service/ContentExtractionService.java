@@ -110,7 +110,7 @@ public class ContentExtractionService {
      */
     @Async("taskExecutor")
     @Transactional
-    public void processUrlsAsync(UUID taskId, List<String> urls, ExtractionType type) {
+    public void processUrlsAsync(UUID taskId, List<String> urls, ExtractionType type, Double scale) {
         ConversionTask task = taskRepository.findById(taskId).orElseThrow();
         task.setStatus(TaskStatus.PROCESSING);
         taskRepository.save(task);
@@ -134,7 +134,7 @@ public class ContentExtractionService {
 
                     // Page 생성 (URL 단위 격리하여 안정성 높임)
                     try (Page page = context.newPage()) {
-                        processSingleUrl(page, url, type, batchDir, fileName);
+                        processSingleUrl(page, url, type, batchDir, fileName, scale);
                     } catch (Exception e) {
                         createErrorLog(batchDir, fileName, url, e.getMessage());
                     }
@@ -186,7 +186,7 @@ public class ContentExtractionService {
         }
     }
 
-    private void processSingleUrl(Page page, String url, ExtractionType type, Path batchDir, String fileName) {
+    private void processSingleUrl(Page page, String url, ExtractionType type, Path batchDir, String fileName, Double scale) {
         page.setDefaultTimeout(TIMEOUT);
         page.setDefaultNavigationTimeout(TIMEOUT);
 
@@ -196,6 +196,16 @@ public class ContentExtractionService {
 
         // 쿠키 동의 팝업 자동 처리
         handleCookiePopups(page);
+
+        // 화면 비율 축소 적용 (줌 조작)
+        if (scale != null && scale != 1.0) {
+            try {
+                page.evaluate("() => { document.body.style.zoom = '" + scale + "'; }");
+                page.waitForTimeout(500); // 렌더링 반영 대기
+            } catch (Exception e) {
+                System.err.println("Failed to apply zoom: " + e.getMessage());
+            }
+        }
 
         if (type == ExtractionType.PDF) {
             page.pdf(new Page.PdfOptions().setPath(batchDir.resolve(fileName + ".pdf")));

@@ -44,10 +44,13 @@ public class ConversionTask {
     @Enumerated(EnumType.STRING)
     private ExtractionType type;
 
-    public ConversionTask(UUID taskId, List<String> urls, ExtractionType type) {
+    private Double scale;
+
+    public ConversionTask(UUID taskId, List<String> urls, ExtractionType type, Double scale) {
         this.taskId = taskId;
         this.urls = urls;
         this.type = type;
+        this.scale = scale != null ? scale : 1.0;
         this.status = TaskStatus.PENDING;
         this.createdAt = LocalDateTime.now();
         this.progress = 0;
@@ -100,5 +103,13 @@ public class ConversionTask {
 
     public void setType(ExtractionType type) {
         this.type = type;
+    }
+
+    public Double getScale() {
+        return scale;
+    }
+
+    public void setScale(Double scale) {
+        this.scale = scale;
     }
 }

@@ -5,5 +5,6 @@ import java.util.List;
 
 public record ExtractionRequest(
         List<String> urls,
-        ExtractionType type) {
+        ExtractionType type,
+        Double scale) {
 }

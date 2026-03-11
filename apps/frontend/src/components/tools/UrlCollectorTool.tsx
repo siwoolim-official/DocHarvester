@@ -16,9 +16,7 @@ import { RefreshCw, Search, Trash2, Copy, ExternalLink, Globe } from "lucide-rea
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 
-interface CrawlResponse {
-  urls: string[];
-}
+
 
 export function UrlCollectorTool() {
   const [url, setUrl] = useState("");
